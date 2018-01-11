@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Joachim Bakke",
+    "email": "npm@heiamoss.com"
+  },
+  "dependencies": {
+    "bluebird": "^3.0.0",
+    "debug": "^3.1.0",
+    "ggencoder": "^0.1.18",
+    "n2k-signalk": "^0.0.3",
+    "superagent": "^3.3.2",
+    "superagent-promise": "^1.0.3"
+  },
+  "description": "SignalK plugin to convert data from Marinetraffic's web api to signalk vessels",
+  "devDependencies": {
+    "@signalk/signalk-schema": "0.0.1-11",
+    "mocha": "^4.0.0"
+  },
+  "keywords": [
+    "signalk-node-server-plugin"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "signalk-marinetraffic-api",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "$NODE $npm_package_main"
+  },
+  "version": "0.0.1"
+}

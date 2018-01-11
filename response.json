@@ -1,0 +1,48 @@
+{
+  "context": "vessels.urn:mrn:imo:mmsi:304010417",
+  "updates": [
+    {
+      "timestamp": "2017-05-19T09:39:57Z",
+      "source": {
+        "label": "marinetraffic"
+      },
+      "values": [
+        {
+          "path": "",
+          "value": {
+            "mmsi": "304010417"
+          }
+        },
+        {
+          "path": "",
+          "value": {
+            "imo": "9015462"
+          }
+        },
+        {
+          "path": "navigation.courseOverGroundTrue",
+          "value": 5.707226654021458
+        },
+        {
+          "path": "navigation.headingTrue",
+          "value": 5.742133239061344
+        },
+        {
+          "path": "navigation.position",
+          "value": {
+            "latitude": "47.758499",
+            "longitude": "-5.154223"
+          }
+        },
+        {
+          "path": "navigation.speedOverGround",
+          "value": 38.068856000000004
+        },
+        {
+          "path": "navigation.state",
+          "value": "motoring"
+        }
+      ]
+    }
+  ]
+}
