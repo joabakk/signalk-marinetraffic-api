@@ -312,9 +312,17 @@ const mappings = [
   },
   {
     path: "navigation.courseGreatCircle.activeRoute.estimatedTimeOfArrival",
-    key: "ETA",
+    key: "ETA",//How to distinguish between reported and MT calculated ETA?
+    //"ETA_CALC"?"ETA_CALC":"ETA"
     conversion: convertTime
-  }
+  }/*,
+  {
+    path: "navigation.courseGreatCircle.activeRoute.distanceToGo",//Not in spec yet
+    key: "DISTANCE_TO_GO",
+    conversion: function(vessel, val) {
+      return val / 1852
+    }
+  }*/
 ]
 
 function getVesselDelta(vessel)
@@ -325,7 +333,7 @@ function getVesselDelta(vessel)
       {
         "timestamp": convertTime(vessel, vessel.TIMESTAMP),
         "source": {
-          "label": "marinetraffic"
+          "label": "marinetraffic-" + vessel.DSRC
         },
         "values": []
       }
