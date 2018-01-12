@@ -23,7 +23,6 @@ const http = require('http')
 const debug = require('debug')('signalk-marinetraffic-api')
 const util = require('util')
 const Promise = require('bluebird')
-//const Promise = this.Promise || require('promise');
 const agent = require('superagent-promise')(require('superagent'), Promise)
 const fs = require("fs");
 const _ = require('lodash')
@@ -49,6 +48,7 @@ module.exports = function(app)
 {
   var plugin = {};
   var timeout = undefined
+  let selfContext = 'vessels.' + app.selfId
 
   plugin.id = "signalk-marinetraffic-api"
   plugin.name = "Marinetraffic API"
@@ -76,7 +76,6 @@ module.exports = function(app)
   {
     var hub = JSON.parse(response)
     debug("response: " + JSON.stringify(hub))
-    //response: {"errors":[{"code":10,"detail":"SERVICE KEY NOT FOUND"}]}
     var status = hub
     if ( status.errors )
     {
@@ -89,8 +88,12 @@ module.exports = function(app)
       debug(JSON.stringify(vessel))
       var delta = getVesselDelta(vessel)
 
+      if ( delta == null ) {
+        return
+      }
+
       debug("vessel: " + JSON.stringify(delta))
-      app.signalk.addDelta(delta)
+      app.handleMessage(plugin.id, delta)
     })
   }
 
@@ -102,7 +105,7 @@ module.exports = function(app)
       {"MMSI":"215819000","IMO":"9034731","SHIP_ID":"150559","LAT":"47.926899","LON":"-5.531450","SPEED":"122","HEADING":"162","COURSE":"157","STATUS":"0","TIMESTAMP":"2017-05-19T09:44:27","DSRC":"TER","UTC_SECONDS":"28"},
       {"MMSI":"255925000","IMO":"9184433","SHIP_ID":"300518","LAT":"47.942631","LON":"-5.116510","SPEED":"79","HEADING":"316","COURSE":"311","STATUS":"0","TIMESTAMP":"2017-05-19T09:43:53","DSRC":"TER","UTC_SECONDS":"52"}]`
       marineTrafficToDeltas(test)
-      
+
       var url = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:10/protocol:jsono"
       debug("url: " + url)
 
