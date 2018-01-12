@@ -271,7 +271,7 @@ const mappings = [
     conversion: function(vessel, val) {
       if ( val == 0 )
       return null
-      return { maximum: val }
+      return { maximum: val / 10}
     }
   },
   {
@@ -285,9 +285,7 @@ const mappings = [
     path: "navigation.speedOverGround",
     key: "SPEED",
     conversion: function(vessel, val) {
-      if ( val == 102.4 )
-      return null;
-      return val * 0.514444
+      return val / 10 *0.514444
     }
   },
   {
@@ -315,14 +313,21 @@ const mappings = [
     key: "ETA",//How to distinguish between reported and MT calculated ETA?
     //"ETA_CALC"?"ETA_CALC":"ETA"
     conversion: convertTime
-  }/*,
+  },/*
   {
     path: "navigation.courseGreatCircle.activeRoute.distanceToGo",//Not in spec yet
     key: "DISTANCE_TO_GO",
     conversion: function(vessel, val) {
       return val / 1852
     }
-  }*/
+  },*/
+  {
+    path: "navigation.logTrip",
+    key: "DISTANCE_TRAVELLED",
+    conversion: function(vessel, val) {
+      return val / 1852
+    }
+  }
 ]
 
 function getVesselDelta(vessel)
