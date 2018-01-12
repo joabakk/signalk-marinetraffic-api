@@ -64,9 +64,15 @@ module.exports = function(app)
         type: "string",
         title: "API Key"
       },
+      msgType: {
+        type: "string",
+        title: "Type of message",
+        enum: ["simple", "extended", "full"],
+        default: "simple"
+      },
       updaterate: {
         type: "number",
-        title: "Rate to get updates from Marinetraffic(s > 120 or according to subscription)",
+        title: "Rate to get updates from Marinetraffic (s, according to subscription and type of message)",
         default: 86400
       }
     }
@@ -101,12 +107,13 @@ module.exports = function(app)
   {
     var update = function()
     {
-      var test = `[{"MMSI":"304010417","IMO":"9015462","SHIP_ID":"359396","LAT":"47.758499","LON":"-5.154223","SPEED":"74","HEADING":"329","COURSE":"327","STATUS":"0","TIMESTAMP":"2017-05-19T09:39:57","DSRC":"TER","UTC_SECONDS":"54"},
+      /*var test = `[{"MMSI":"304010417","IMO":"9015462","SHIP_ID":"359396","LAT":"47.758499","LON":"-5.154223","SPEED":"74","HEADING":"329","COURSE":"327","STATUS":"0","TIMESTAMP":"2017-05-19T09:39:57","DSRC":"TER","UTC_SECONDS":"54"},
       {"MMSI":"215819000","IMO":"9034731","SHIP_ID":"150559","LAT":"47.926899","LON":"-5.531450","SPEED":"122","HEADING":"162","COURSE":"157","STATUS":"0","TIMESTAMP":"2017-05-19T09:44:27","DSRC":"TER","UTC_SECONDS":"28"},
       {"MMSI":"255925000","IMO":"9184433","SHIP_ID":"300518","LAT":"47.942631","LON":"-5.116510","SPEED":"79","HEADING":"316","COURSE":"311","STATUS":"0","TIMESTAMP":"2017-05-19T09:43:53","DSRC":"TER","UTC_SECONDS":"52"}]`
-      marineTrafficToDeltas(test)
+      */
+      //marineTrafficToDeltas(test)
 
-      var url = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:10/protocol:jsono"
+      var url = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:10/msgtype:" + options.msgType + "/protocol:jsono"
       debug("url: " + url)
 
       agent('GET', url).end().then(function(response) {
@@ -322,7 +329,7 @@ const mappings = [
     }
   },*/
   {
-    path: "navigation.logTrip",
+    path: "navigation.logTrip",//Not in spec yet
     key: "DISTANCE_TRAVELLED",
     conversion: function(vessel, val) {
       return val / 1852
