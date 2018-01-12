@@ -1,7 +1,56 @@
 {
+  "_args": [
+    [
+      {
+        "raw": "signalk-marinetraffic-api",
+        "scope": null,
+        "escapedName": "signalk-marinetraffic-api",
+        "name": "signalk-marinetraffic-api",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/joachim/Downloads/signalk-server-node"
+    ]
+  ],
+  "_from": "signalk-marinetraffic-api@latest",
+  "_id": "signalk-marinetraffic-api@0.0.1",
+  "_inCache": true,
+  "_location": "/signalk-marinetraffic-api",
+  "_nodeVersion": "6.9.2",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/signalk-marinetraffic-api-0.0.1.tgz_1515751791392_0.9049276227597147"
+  },
+  "_npmUser": {
+    "name": "joabakk",
+    "email": "npm@heiamoss.com"
+  },
+  "_npmVersion": "3.10.9",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "signalk-marinetraffic-api",
+    "scope": null,
+    "escapedName": "signalk-marinetraffic-api",
+    "name": "signalk-marinetraffic-api",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/signalk-marinetraffic-api/-/signalk-marinetraffic-api-0.0.1.tgz",
+  "_shasum": "455fa5fbae3f25385858210c37a00e59042d851f",
+  "_shrinkwrap": null,
+  "_spec": "signalk-marinetraffic-api",
+  "_where": "/Users/joachim/Downloads/signalk-server-node",
   "author": {
     "name": "Joachim Bakke",
     "email": "npm@heiamoss.com"
+  },
+  "bugs": {
+    "url": "https://github.com/joabakk/signalk-marinetraffic-api/issues"
   },
   "dependencies": {
     "bluebird": "^3.0.0",
@@ -16,16 +65,32 @@
     "@signalk/signalk-schema": "0.0.1-11",
     "mocha": "^4.0.0"
   },
+  "directories": {},
+  "dist": {
+    "shasum": "455fa5fbae3f25385858210c37a00e59042d851f",
+    "tarball": "https://registry.npmjs.org/signalk-marinetraffic-api/-/signalk-marinetraffic-api-0.0.1.tgz"
+  },
+  "homepage": "https://github.com/joabakk/signalk-marinetraffic-api#readme",
   "keywords": [
     "signalk-node-server-plugin"
   ],
   "license": "ISC",
   "main": "index.js",
+  "maintainers": [
+    {
+      "name": "joabakk",
+      "email": "npm@heiamoss.com"
+    }
+  ],
   "name": "signalk-marinetraffic-api",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joabakk/signalk-marinetraffic-api.git"
+  },
   "scripts": {
     "test": "$NODE $npm_package_main"
   },
-  "version": "0.0.1"
+  "version": "0.1.0"
 }
