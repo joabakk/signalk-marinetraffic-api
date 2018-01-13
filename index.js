@@ -47,7 +47,7 @@ const stateMapping = {
 module.exports = function(app)
 {
   var plugin = {};
-  var timeout = undefined
+  var simpleTimeout, extendedTimeout, fullTimeout = undefined
   let selfContext = 'vessels.' + app.selfId
 
   plugin.id = "signalk-marinetraffic-api"
@@ -64,16 +64,25 @@ module.exports = function(app)
         type: "string",
         title: "API Key"
       },
-      msgType: {
-        type: "string",
-        title: "Type of message",
-        enum: ["simple", "extended", "full"],
-        default: "simple"
-      },
-      updaterate: {
+      simpleRate: {
         type: "number",
-        title: "Rate to get updates from Marinetraffic (s, according to subscription and type of message)",
-        default: 86400
+        title: "API update limit for simple queries (minutes), negative to disable",
+        default: 120
+      },
+      extendedRate: {
+        type: "number",
+        title: "API update limit for extended queries (minutes), negative to disable",
+        default: 60
+      },
+      fullRate: {
+        type: "number",
+        title: "API update limit for full queries (minutes), negative to disable",
+        default: 60
+      },
+      timespan: {
+        type: "number",
+        title: "Marinetraffic timespan, ignoring older updates (minutes)",
+        default: 10
       }
     }
   }
@@ -105,7 +114,7 @@ module.exports = function(app)
 
   plugin.start = function(options)
   {
-    var update = function()
+    var update = function(msgType)
     {
       /*var test = `[{"MMSI":"304010417","IMO":"9015462","SHIP_ID":"359396","LAT":"47.758499","LON":"-5.154223","SPEED":"74","HEADING":"329","COURSE":"327","STATUS":"0","TIMESTAMP":"2017-05-19T09:39:57","DSRC":"TER","UTC_SECONDS":"54"},
       {"MMSI":"215819000","IMO":"9034731","SHIP_ID":"150559","LAT":"47.926899","LON":"-5.531450","SPEED":"122","HEADING":"162","COURSE":"157","STATUS":"0","TIMESTAMP":"2017-05-19T09:44:27","DSRC":"TER","UTC_SECONDS":"28"},
@@ -113,7 +122,7 @@ module.exports = function(app)
       */
       //marineTrafficToDeltas(test)
 
-      var url = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:10/msgtype:" + options.msgType + "/protocol:jsono"
+      var url = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:" + options.timespan + "/msgtype:" + msgType + "/protocol:jsono"
       debug("url: " + url)
 
       agent('GET', url).end().then(function(response) {
@@ -122,20 +131,36 @@ module.exports = function(app)
 
     }
 
-    var rate = options.updaterate
+    var simpleRate = options.simpleRate
+    var extendedRate = options.extendedRate
+    var fullRate = options.fullRate
 
-    if ( !rate || rate <=120 )
-    rate = 121
-    //rate = 1
-    update()
-    timeout = setInterval(update, rate * 1000)
+    update(fullRate>0?"full":extendedRate>0?"extended":"simple") //start with the most comprehensive call
+    if(simpleRate > 0){
+      simpleTimeout = setInterval(update, simpleRate * 60000, "simple")
+    }
+    if(extendedRate > 0){
+      extendedTimeout = setInterval(update, extendedRate * 60000, "extended")
+    }
+    if(fullRate > 0){
+      fullTimeout = setInterval(update, fullRate * 60000, "full")
+    }
+
   }
 
   plugin.stop = function()
   {
-    if ( timeout ) {
-      clearInterval(timeout)
-      timeout = undefined
+    if ( simpleTimeout ) {
+      clearInterval(simpleTimeout)
+      simpleTimeout = undefined
+    }
+    if ( extendedTimeout ) {
+      clearInterval(extendedTimeout)
+      extendedTimeout = undefined
+    }
+    if ( fullTimeout ) {
+      clearInterval(fullTimeout)
+      fullTimeout = undefined
     }
   }
 
@@ -320,17 +345,30 @@ const mappings = [
     key: "ETA",//How to distinguish between reported and MT calculated ETA?
     //"ETA_CALC"?"ETA_CALC":"ETA"
     conversion: convertTime
-  },/*
+  },
+  {
+    path: "navigation.courseGreatCircle.activeRoute.estimatedTimeOfArrivalCalculated",
+    key: "ETA_CALC",//How to distinguish between reported and MT calculated ETA?
+    //"ETA_CALC"?"ETA_CALC":"ETA"
+    conversion: convertTime
+  },
   {
     path: "navigation.courseGreatCircle.activeRoute.distanceToGo",//Not in spec yet
     key: "DISTANCE_TO_GO",
     conversion: function(vessel, val) {
       return val / 1852
     }
-  },*/
+  },
   {
-    path: "navigation.logTrip",//Not in spec yet
+    path: "navigation.logTrip",
     key: "DISTANCE_TRAVELLED",
+    conversion: function(vessel, val) {
+      return val / 1852
+    }
+  },
+  {
+    path: "navigation.trip.distanceToGo",//Not in spec yet
+    key: "DISTANCE_TO_GO",
     conversion: function(vessel, val) {
       return val / 1852
     }
