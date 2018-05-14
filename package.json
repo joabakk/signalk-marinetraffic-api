@@ -74,7 +74,7 @@
   },
   "description": "SignalK plugin to convert data from Marinetraffic's web api to signalk vessels",
   "devDependencies": {
-    "@signalk/signalk-schema": "0.0.1-11",
+    "@signalk/signalk-schema": "^1.0.3",
     "mocha": "^4.0.0"
   },
   "directories": {},
