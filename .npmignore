@@ -1,0 +1,3 @@
+# Ignore git files
+.DS_Store
+.git
