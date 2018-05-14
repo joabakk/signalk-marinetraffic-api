@@ -1,5 +1,5 @@
 /*
-* Copyright 2017 Scott Bender <scott@scottbender.net>
+* Copyright 2017 Scott Bender <scott@scottbender.net> and Joachim Bakke
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.

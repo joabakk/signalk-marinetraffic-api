@@ -1,5 +1,3 @@
-# signalk-aishub-ws
-
 SignalK node server plugin to convert data from Marinetraffic's web api to signalk vessels
 
 Install with
