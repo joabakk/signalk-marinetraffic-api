@@ -116,13 +116,12 @@ module.exports = function(app)
   {
     var update = function(msgType)
     {
-      /*
-      var test = `[{"MMSI":"304010417","IMO":"9015462","SHIP_ID":"359396","LAT":"47.758499","LON":"-5.154223","SPEED":"74","HEADING":"329","COURSE":"327","STATUS":"0","TIMESTAMP":"2017-05-19T09:39:57","DSRC":"TER","UTC_SECONDS":"54"},
+      /*var test = `[{"MMSI":"304010417","IMO":"9015462","SHIP_ID":"359396","LAT":"47.758499","LON":"-5.154223","SPEED":"74","HEADING":"329","COURSE":"327","STATUS":"0","TIMESTAMP":"2017-05-19T09:39:57","DSRC":"TER","UTC_SECONDS":"54"},
       {"MMSI":"215819000","IMO":"9034731","SHIP_ID":"150559","LAT":"47.926899","LON":"-5.531450","SPEED":"122","HEADING":"162","COURSE":"157","STATUS":"0","TIMESTAMP":"2017-05-19T09:44:27","DSRC":"TER","UTC_SECONDS":"28"},
       {"MMSI":"255925000","IMO":"9184433","SHIP_ID":"300518","LAT":"47.942631","LON":"-5.116510","SPEED":"79","HEADING":"316","COURSE":"311","STATUS":"0","TIMESTAMP":"2017-05-19T09:43:53","DSRC":"TER","UTC_SECONDS":"52"}]`
 
-      marineTrafficToDeltas(test)
-      */
+      marineTrafficToDeltas(test)*/
+
       var url = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:" + options.timespan + "/msgtype:" + msgType + "/protocol:jsono"
       debug("url: " + url)
 
@@ -325,17 +324,11 @@ const mappings = [
     path: "design.aisShipType",
     key: "SHIPTYPE",
     conversion: function(vessel, val) {
-
-      try {const name = schema.getAISShipTypeName(val)
-        if ( name ) {
-          return { id: val, 'name': name }
-        } else {
-          return null
-        }
-      }
-      catch (e){
-        debug(e)
-        return
+      const name = schema.getAISShipTypeName(val)
+      if ( name ) {
+        return { id: val, 'name': name }
+      } else {
+        return null
       }
     }
   },
@@ -354,7 +347,7 @@ const mappings = [
     conversion: convertTime
   },/*
   {
-    path: "navigation.courseGreatCircle.activeRoute.estimatedTimeOfArrivalCalculated",
+    path: "navigation.courseGreatCircle.activeRoute.estimatedTimeOfArrivalCalculated",//Not spec compliant
     key: "ETA_CALC",//How to distinguish between reported and MT calculated ETA?
     //"ETA_CALC"?"ETA_CALC":"ETA"
     conversion: convertTime
@@ -371,15 +364,15 @@ const mappings = [
     key: "DISTANCE_TRAVELLED",
     conversion: function(vessel, val) {
       return val / 1852
-    }
-  }/*,
+    }/*
+  },
   {
     path: "navigation.trip.distanceToGo",//Not in spec yet
     key: "DISTANCE_TO_GO",
     conversion: function(vessel, val) {
       return val / 1852
-    }
-  }*/
+    }*/
+  }
 ]
 
 function getVesselDelta(vessel)
