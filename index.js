@@ -333,10 +333,10 @@ const mappings = [
           return null
         }
       }
-    }
-    catch (e){
-      debug(e)
-      return
+      catch (e){
+        debug(e)
+        return
+      }
     }
   },
   {
