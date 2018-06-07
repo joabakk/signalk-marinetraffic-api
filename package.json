@@ -72,7 +72,7 @@
     "superagent": "^3.3.2",
     "superagent-promise": "^1.0.3"
   },
-  "description": "SignalK plugin to convert data from Marinetraffic's web api to signalk vessels",
+  "description": "SignalK plugin to convert data from Marinetraffic's web api (PS02, PS03 and PS07?) to signalk vessels",
   "devDependencies": {
     "@signalk/signalk-schema": "^1.0.3",
     "mocha": "^4.0.0"
