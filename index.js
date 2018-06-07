@@ -129,9 +129,8 @@ module.exports = function(app)
       var endPoint = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:" + options.timespan + "/msgtype:" + msgType + "/protocol:jsono"
       //https://services.marinetraffic.com/api/exportvessels/v:8/YOUR-API-KEY/timespan:#minutes/protocol:value for PS02 and PS03
       if (options.vessel != 0){
-        endPoint = "v:5"
+        endPoint = "http://services.marinetraffic.com/api/exportvessels/v:5/" + options.apikey + "/timespan:" + options.timespan + "/mmsi:" + options.vessel + "/msgtype:" + msgType + "/protocol:jsono"
       }
-      var url = "http://services.marinetraffic.com/api/exportvessels/v:5/" + options.apikey + "/timespan:" + options.timespan + "/mmsi:" + options.vessel + "/msgtype:" + msgType + "/protocol:jsono"
       //https://services.marinetraffic.com/api/exportvessel/v:5/YOUR-API-KEY/timespan:#minutes/mmsi:value for PS07
       debug("url: " + endPoint)
 
