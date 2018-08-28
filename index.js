@@ -100,7 +100,7 @@ module.exports = function(app)
     if ( status.errors )
     {
 
-      app.error("error response from Marinetraffic: " + JSON.stringify(status.errors[0].detail))
+      app.setProviderError(JSON.stringify(status.errors[0].detail))
       return
     }
 
