@@ -67,7 +67,7 @@
   "dependencies": {
     "bluebird": "^3.0.0",
     "debug": "^3.1.0",
-    "ggencoder": "^0.1.18",
+    "ggencoder": "^1.0.2",
     "n2k-signalk": "^0.0.3",
     "superagent": "^3.3.2",
     "superagent-promise": "^1.0.3"
@@ -75,7 +75,7 @@
   "description": "SignalK plugin to convert data from Marinetraffic's web api (PS02, PS03 and PS07?) to signalk vessels",
   "devDependencies": {
     "@signalk/signalk-schema": "^1.0.3",
-    "mocha": "^4.0.0"
+    "mocha": "^5.2.0"
   },
   "directories": {},
   "dist": {
