@@ -25,8 +25,9 @@
       "/Users/joachim/Downloads/signalk-server-node"
     ]
   ],
-  "_from": "signalk-marinetraffic-api",
-  "_id": "signalk-marinetraffic-api@0.1.4",
+  "_from": "git+https://github.com/joabakk/signalk-marinetraffic-api.git",
+  "_id": "signalk-marinetraffic-api@1.0.7",
+  "_inBundle": false,
   "_inCache": true,
   "_location": "/signalk-marinetraffic-api",
   "_nodeVersion": "6.9.2",
@@ -41,22 +42,22 @@
   "_npmVersion": "3.10.9",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "signalk-marinetraffic-api",
-    "scope": null,
-    "escapedName": "signalk-marinetraffic-api",
-    "name": "signalk-marinetraffic-api",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
+    "type": "git",
+    "raw": "https://github.com/joabakk/signalk-marinetraffic-api",
+    "rawSpec": "https://github.com/joabakk/signalk-marinetraffic-api",
+    "saveSpec": "git+https://github.com/joabakk/signalk-marinetraffic-api.git",
+    "fetchSpec": "https://github.com/joabakk/signalk-marinetraffic-api.git",
+    "gitCommittish": null
   },
   "_requiredBy": [
-    "#USER"
+    "#USER",
+    "/"
   ],
-  "_resolved": "https://registry.npmjs.org/signalk-marinetraffic-api/-/signalk-marinetraffic-api-0.1.4.tgz",
+  "_resolved": "git+https://github.com/joabakk/signalk-marinetraffic-api.git#05f43bf2af36b7bbc0afaffde2880996260b83ce",
   "_shasum": "3f2ea47b6c643e203632ab7a9457511534849837",
   "_shrinkwrap": null,
-  "_spec": "signalk-marinetraffic-api",
-  "_where": "/Users/joachim/Downloads/signalk-server-node",
+  "_spec": "https://github.com/joabakk/signalk-marinetraffic-api",
+  "_where": "/home/pi/.signalk",
   "author": {
     "name": "Joachim Bakke",
     "email": "npm@heiamoss.com"
@@ -64,6 +65,7 @@
   "bugs": {
     "url": "https://github.com/joabakk/signalk-marinetraffic-api/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "bluebird": "^3.0.0",
     "debug": "^3.1.0",
@@ -72,6 +74,7 @@
     "superagent": "^3.3.2",
     "superagent-promise": "^1.0.3"
   },
+  "deprecated": false,
   "description": "SignalK plugin to convert data from Marinetraffic's web api (PS02, PS03 and PS07?) to signalk vessels",
   "devDependencies": {
     "@signalk/signalk-schema": "^1.0.3",
@@ -97,7 +100,6 @@
   ],
   "name": "signalk-marinetraffic-api",
   "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joabakk/signalk-marinetraffic-api.git"
@@ -105,5 +107,5 @@
   "scripts": {
     "test": "$NODE $npm_package_main"
   },
-  "version": "1.0.7"
+  "version": "1.1.0"
 }
