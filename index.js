@@ -126,10 +126,10 @@ module.exports = function(app)
       {"MMSI":"255925000","IMO":"9184433","SHIP_ID":"300518","LAT":"47.942631","LON":"-5.116510","SPEED":"79","HEADING":"316","COURSE":"311","STATUS":"0","TIMESTAMP":"2017-05-19T09:43:53","DSRC":"TER","UTC_SECONDS":"52"}]`
 
       marineTrafficToDeltas(test)*/
-      var endPoint = "http://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:" + options.timespan + "/msgtype:" + msgType + "/protocol:jsono"
+      var endPoint = "https://services.marinetraffic.com/api/exportvessels/v:8/" + options.apikey + "/timespan:" + options.timespan + "/msgtype:" + msgType + "/protocol:jsono"
       //https://services.marinetraffic.com/api/exportvessels/v:8/YOUR-API-KEY/timespan:#minutes/protocol:value for PS02 and PS03
       if (options.vessel != 0){
-        endPoint = "http://services.marinetraffic.com/api/exportvessel/v:5/" + options.apikey + "/timespan:" + options.timespan + "/mmsi:" + options.vessel + "/protocol:jsono"
+        endPoint = "https://services.marinetraffic.com/api/exportvessel/v:5/" + options.apikey + "/timespan:" + options.timespan + "/mmsi:" + options.vessel + "/protocol:jsono"
         //https://services.marinetraffic.com/api/exportvessel/v:5/YOUR-API-KEY/timespan:#minutes/mmsi:value for PS07
       }
       debug("url: " + endPoint)
