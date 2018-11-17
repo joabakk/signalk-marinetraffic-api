@@ -71,7 +71,7 @@
     "debug": "^3.1.0",
     "ggencoder": "^1.0.2",
     "n2k-signalk": "^0.0.3",
-    "superagent": "^3.3.2",
+    "superagent": "^4.0.0",
     "superagent-promise": "^1.0.3"
   },
   "deprecated": false,
