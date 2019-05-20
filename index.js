@@ -391,9 +391,7 @@ function getVesselDelta(vessel)
     "updates": [
       {
         "timestamp": convertTime(vessel, vessel.TIMESTAMP),
-        "source": {
-          "label": "marinetraffic-" + vessel.DSRC
-        },
+        "$source": "marinetraffic-" + vessel.DSRC,
         "values": []
       }
     ]
